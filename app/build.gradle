@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+
+android {
+  compileSdkVersion androidVersions.compileSdkVersion
+  buildToolsVersion androidVersions.buildToolsVersion
+
+  defaultConfig {
+    applicationId "com.mapbox.services.android.navigation.testapp"
+    minSdkVersion androidVersions.minSdkVersion
+    targetSdkVersion androidVersions.targetSdkVersion
+    versionCode 1
+    versionName "0.1"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+
+  buildTypes {
+    debug {
+      testCoverageEnabled = false
+    }
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  dexOptions {
+    maxProcessCount 8
+    javaMaxHeapSize "2g"
+    preDexLibraries true
+  }
+
+  lintOptions {
+    abortOnError false
+  }
+}
+
+sonarqube {
+  skipProject = true
+}
+
+dependencies {
+  // Mapbox Navigation SDK
+  implementation project(':libandroid-navigation-ui')
+
+  // Support libraries
+  implementation dependenciesList.supportAppcompatV7
+  implementation dependenciesList.supportConstraintLayout
+
+  // Architecture libraries
+  implementation dependenciesList.lifecycleExtensions
+  annotationProcessor dependenciesList.lifecycleCompiler
+
+  // Logging
+  implementation dependenciesList.timber
+
+  // Butter Knife
+  implementation dependenciesList.butterKnife
+  annotationProcessor dependenciesList.butterKnifeProcessor
+
+  // Leak Canary
+  debugImplementation dependenciesList.leakCanaryDebug
+  releaseImplementation dependenciesList.leakCanaryRelease
+  androidTestImplementation dependenciesList.leakCanaryTest
+
+  // Unit Testing
+  testImplementation dependenciesList.junit
+  testImplementation dependenciesList.mockito
+
+  // Instrumentation testing
+  androidTestImplementation(dependenciesList.testEspressoCore, {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+}
+
+apply from: "${rootDir}/gradle/developer-config.gradle"
+apply from: "${rootDir}/gradle/checkstyle.gradle"

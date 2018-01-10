@@ -1,0 +1,84 @@
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion androidVersions.compileSdkVersion
+  buildToolsVersion androidVersions.buildToolsVersion
+
+  defaultConfig {
+    minSdkVersion androidVersions.minSdkVersion
+    targetSdkVersion androidVersions.targetSdkVersion
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    vectorDrawables.useSupportLibrary = true
+
+    buildConfigField('String',
+        "MAPBOX_NAVIGATION_SDK_IDENTIFIER", String.format("\"%s\"", "mapbox-navigation-ui-android")
+    )
+    buildConfigField 'String',
+        "MAPBOX_NAVIGATION_EVENTS_USER_AGENT", String.format("\"mapbox-navigation-ui-android/%s\"",
+        project.VERSION_NAME
+    )
+  }
+  configurations {
+    javadocDeps
+  }
+
+  buildTypes {
+    debug {
+      testCoverageEnabled = true
+    }
+  }
+}
+
+dependencies {
+  // Navigation SDK
+  api project(':libandroid-navigation')
+
+  // Mapbox Map SDK
+  api(dependenciesList.mapboxMapSdk) {
+    transitive = true
+    exclude module: 'lost'
+    exclude module: 'mapbox-java-geojson'
+    exclude module: 'mapbox-android-telemetry'
+  }
+
+  // Support libraries
+  api dependenciesList.supportAppcompatV7
+  api dependenciesList.supportDesign
+  api dependenciesList.supportRecyclerView
+  api dependenciesList.supportConstraintLayout
+  api dependenciesList.supportCardView
+
+  // Architecture libraries
+  implementation dependenciesList.lifecycleExtensions
+  annotationProcessor dependenciesList.lifecycleCompiler
+
+  // Mapbox plugins
+  api(dependenciesList.locationLayerPlugin) {
+    exclude module: 'mapbox-android-services'
+    exclude module: 'mapbox-android-sdk'
+  }
+  api dependenciesList.mapboxJavaServices
+
+  // AutoValues
+  annotationProcessor dependenciesList.autoValue
+  compileOnly dependenciesList.autoValue
+
+  // Logging
+  implementation dependenciesList.timber
+
+  // AWS Polly
+  implementation dependenciesList.polly
+
+  // Mapbox Map SDK Javadoc
+  javadocDeps dependenciesList.mapboxMapSdk
+
+  // Unit testing
+  testImplementation dependenciesList.junit
+  testImplementation dependenciesList.mockito
+  testImplementation dependenciesList.robolectric
+}
+
+apply from: 'javadoc.gradle'
+apply from: "${rootDir}/gradle/mvn-push-android.gradle"
+apply from: "${rootDir}/gradle/checkstyle.gradle"
+apply from: "${rootDir}/gradle/jacoco.gradle"

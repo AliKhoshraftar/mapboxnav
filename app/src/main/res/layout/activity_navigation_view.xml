@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/btnStartNavigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Navigate" />
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapViewMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraZoom="10"
+        mapbox:mapbox_cameraTargetLat="35.690975"
+        mapbox:mapbox_cameraTargetLng="51.433868"
+        mapbox:mapbox_uiAttribution="false">
+
+    </com.mapbox.mapboxsdk.maps.MapView>
+
+</RelativeLayout>
