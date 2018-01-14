@@ -227,7 +227,7 @@ public class NavigationMapRoute implements ProgressChangeListener, MapView.OnMap
    */
   public void addRoute(DirectionsRoute directionsRoute) {
     List<DirectionsRoute> routes = new ArrayList<>();
-    routes.add(directionsRoute);
+     routes.add(directionsRoute);
     addRoutes(routes);
   }
 
@@ -327,16 +327,6 @@ public class NavigationMapRoute implements ProgressChangeListener, MapView.OnMap
       // through all the map layers.
       layerIds.add(String.format(Locale.US, ID_FORMAT, GENERIC_ROUTE_SHIELD_LAYER_ID, index));
       layerIds.add(String.format(Locale.US, ID_FORMAT, GENERIC_ROUTE_LAYER_ID, index));
-
-//      List<String> ids = new ArrayList<>();
-//      for (int j = 0; j < mapboxMap.getLayers().size(); j++) {
-//        ids.add(mapboxMap.getLayers().get(j).getId());
-//      }
-//
-//      List<Integer> indexes = new ArrayList<>();
-//      for (int j = 0; j < mapboxMap.getLayers().size(); j++) {
-//        indexes.add(j);
-//      }
 
       // Add the route shield first followed by the route to ensure the shield is always on the
       // bottom.
@@ -530,7 +520,7 @@ public class NavigationMapRoute implements ProgressChangeListener, MapView.OnMap
       for (int i = 0; i < styleLayers.size(); i++) {
         if (!(styleLayers.get(i) instanceof SymbolLayer)
           // Avoid placing the route on top of the user location layer
-          && !styleLayers.get(i).getId().contains("mapbox-location")) {
+          && !styleLayers.get(i).getId().contains("mapbox-location") && !styleLayers.get(i).getId().contains("web-map-layer")) {
           belowLayer = styleLayers.get(i).getId();
         }
       }
@@ -636,7 +626,7 @@ public class NavigationMapRoute implements ProgressChangeListener, MapView.OnMap
         }
       }
     }
-    updateRoute();
+//    updateRoute();
     if (onRouteSelectionChangeListener != null) {
       onRouteSelectionChangeListener.onNewPrimaryRouteSelected(
         directionsRoutes.get(primaryRouteIndex));
@@ -730,8 +720,6 @@ public class NavigationMapRoute implements ProgressChangeListener, MapView.OnMap
           if (leg.annotation().congestion().size() + 1 <= lineString.getCoordinates().size()) {
             double[] startCoord = lineString.getCoordinates().get(i).getCoordinates();
             double[] endCoord = lineString.getCoordinates().get(i + 1).getCoordinates();
-//            double[] startCoordReverse = {startCoord[1],startCoord[0]};
-//            double[] endCoordReverse = {endCoord[1],endCoord[0]};
 
             LineString congestionLineString = LineString.fromCoordinates(new double[][] {startCoord,
                     endCoord});
@@ -744,8 +732,8 @@ public class NavigationMapRoute implements ProgressChangeListener, MapView.OnMap
           }
         }
       } else {
-//        Feature feature = Feature.fromGeometry(lineString);
-//        features.add(feature);
+        Feature feature = Feature.fromGeometry(lineString);
+        features.add(feature);
       }
     }
     return FeatureCollection.fromFeatures(features);

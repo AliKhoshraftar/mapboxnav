@@ -31,6 +31,9 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerMode;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
+import com.mapbox.mapboxsdk.style.layers.RasterLayer;
+import com.mapbox.mapboxsdk.style.sources.RasterSource;
+import com.mapbox.mapboxsdk.style.sources.TileSet;
 import com.mapbox.services.android.navigation.ui.v5.camera.NavigationCamera;
 import com.mapbox.services.android.navigation.ui.v5.instruction.InstructionView;
 import com.mapbox.services.android.navigation.ui.v5.location.LocationViewModel;
@@ -85,6 +88,7 @@ public class NavigationView extends CoordinatorLayout implements LifecycleObserv
   private LocationLayerPlugin locationLayer;
   private OnNavigationReadyCallback onNavigationReadyCallback;
   private boolean resumeState;
+  private RasterSource webMapSource;
 
   public NavigationView(Context context) {
     this(context, null);
@@ -191,6 +195,7 @@ public class NavigationView extends CoordinatorLayout implements LifecycleObserv
     ThemeSwitcher.setMapStyle(getContext(), map, new MapboxMap.OnStyleLoadedListener() {
       @Override
       public void onStyleLoaded(String style) {
+        initMap();
         initRoute();
         initLocationLayer();
         initLifecycleObservers();
@@ -200,6 +205,46 @@ public class NavigationView extends CoordinatorLayout implements LifecycleObserv
         onNavigationReadyCallback.onNavigationReady();
       }
     });
+
+
+}
+
+  private void initMap() {
+
+//    for (int i = 0; i < map.getLayers().size(); i++) {
+//      map.removeLayer(map.getLayers().get(i));
+//    }
+//
+//    for (int i = 0; i < map.getSources().size(); i++) {
+//      map.removeSource(map.getSources().get(i));
+//    }
+//
+//    for (int i = 0; i < map.getAnnotations().size(); i++) {
+//      map.removeAnnotation(map.getAnnotations().get(i));
+//    }
+
+    webMapSource = new RasterSource(
+            "web-map-source",
+            new TileSet("tileset", "http://map.ir/shiveh?" +
+                    "bbox={bbox-epsg-3857}" +
+                    "&service=WMS" +
+                    "&version=1.1.0" +
+                    "&EXCEPTIONS=application/vnd.ogc.se_inimage" +
+                    "&request=GetMap" +
+                    "&layers=Shiveh:ShivehNOPOI" +
+                    "&width=256" +
+                    "&height=256" +
+                    "&srs=EPSG:3857" +
+                    "&format=image/png"), 256);
+
+    map.addSource(webMapSource);
+
+    // Add the web map source to the map.
+    RasterLayer webMapLayer = new RasterLayer("web-map-layer", "web-map-source");
+    map.addLayer(webMapLayer);
+//    mapbox-navigation-route-layer
+    map.getUiSettings().setLogoEnabled(false);
+    map.getUiSettings().setCompassEnabled(true);
   }
 
   /**
@@ -416,7 +461,7 @@ public class NavigationView extends CoordinatorLayout implements LifecycleObserv
    */
   private void initRoute() {
     int routeStyleRes = ThemeSwitcher.retrieveNavigationViewStyle(getContext(), R.attr.navigationViewRouteStyle);
-    mapRoute = new NavigationMapRoute(null, mapView, map, routeStyleRes);
+    mapRoute = new NavigationMapRoute(null, mapView, map, routeStyleRes,"web-map-layer");
   }
 
   /**

@@ -292,7 +292,7 @@ public class NavigationViewActivityOld extends AppCompatActivity implements OnMa
   public void boundCameraToRoute() {
     if (route != null) {
       List<Point> routeCoords = LineString.fromPolyline(route.geometry(),
-        Constants.PRECISION_6).coordinates();
+        Constants.PRECISION_5).coordinates();
       List<LatLng> bboxPoints = new ArrayList<>();
       for (Point point : routeCoords) {
         bboxPoints.add(new LatLng(point.latitude(), point.longitude()));

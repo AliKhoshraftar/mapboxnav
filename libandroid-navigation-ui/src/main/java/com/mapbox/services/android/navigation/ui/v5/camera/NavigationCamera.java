@@ -187,7 +187,7 @@ public class NavigationCamera implements ProgressChangeListener {
    */
   @NonNull
   private CameraPosition buildCameraPositionFromRoute(DirectionsRoute route) {
-    LineString lineString = LineString.fromPolyline(route.geometry(), Constants.PRECISION_6);
+    LineString lineString = LineString.fromPolyline(route.geometry(), Constants.PRECISION_5);
 
     double initialBearing = TurfMeasurement.bearing(
       Point.fromLngLat(

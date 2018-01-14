@@ -43,7 +43,7 @@ public class TriggerTest extends BaseTest {
     DirectionsRoute route = response.routes().get(0);
     Location location = new Location("test");
     List<Point> coords = PolylineUtils.decode(route.legs().get(0).steps().get(1).geometry(),
-      Constants.PRECISION_6);
+      Constants.PRECISION_5);
     location.setLatitude(coords.get(0).latitude());
     location.setLongitude(coords.get(0).longitude());
     routeProgress = RouteProgress.builder()

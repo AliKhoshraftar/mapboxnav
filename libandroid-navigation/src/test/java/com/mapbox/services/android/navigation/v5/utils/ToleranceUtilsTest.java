@@ -67,7 +67,7 @@ public class ToleranceUtilsTest extends BaseTest {
       .build();
 
     double distanceToIntersection = response.routes().get(0).distance() - 39;
-    LineString lineString = LineString.fromPolyline(response.routes().get(0).geometry(), Constants.PRECISION_6);
+    LineString lineString = LineString.fromPolyline(response.routes().get(0).geometry(), Constants.PRECISION_5);
     Point closePoint
       = TurfMeasurement.along(lineString, distanceToIntersection, TurfConstants.UNIT_METERS);
 
@@ -87,7 +87,7 @@ public class ToleranceUtilsTest extends BaseTest {
       .build();
 
     double distanceToIntersection = response.routes().get(0).distance();
-    LineString lineString = LineString.fromPolyline(response.routes().get(0).geometry(), Constants.PRECISION_6);
+    LineString lineString = LineString.fromPolyline(response.routes().get(0).geometry(), Constants.PRECISION_5);
     Point closePoint
       = TurfMeasurement.along(lineString, distanceToIntersection, TurfConstants.UNIT_METERS);
 

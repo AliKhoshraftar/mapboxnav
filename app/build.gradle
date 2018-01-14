@@ -42,6 +42,8 @@ dependencies {
   // Mapbox Navigation SDK
   implementation project(':libandroid-navigation-ui')
 
+  compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.3.0'
+
   // Support libraries
   implementation dependenciesList.supportAppcompatV7
   implementation dependenciesList.supportConstraintLayout

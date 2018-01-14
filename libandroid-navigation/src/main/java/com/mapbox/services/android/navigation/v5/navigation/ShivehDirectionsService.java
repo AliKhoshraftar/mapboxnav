@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface ShivehDirectionsService {
 
-    @GET("full/route/v1/driving/{coordinates}")
+    @GET("route/v1/driving/{coordinates}")
     Call<DirectionsResponse> getCall(
 //            @Header("User-Agent") String userAgent,
 //            @Path("user") String user,

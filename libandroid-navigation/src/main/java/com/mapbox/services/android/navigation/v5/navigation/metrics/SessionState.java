@@ -22,7 +22,7 @@ public abstract class SessionState {
    */
   public String originalGeometry() {
     List<Point> geometryPositions
-      = PolylineUtils.decode(originalDirectionRoute().geometry(), Constants.PRECISION_6);
+      = PolylineUtils.decode(originalDirectionRoute().geometry(), Constants.PRECISION_5);
     return PolylineUtils.encode(geometryPositions, Constants.PRECISION_5);
   }
 
@@ -55,7 +55,7 @@ public abstract class SessionState {
 
   public String currentGeometry() {
     List<Point> geometryPositions
-      = PolylineUtils.decode(currentDirectionRoute().geometry(), Constants.PRECISION_6);
+      = PolylineUtils.decode(currentDirectionRoute().geometry(), Constants.PRECISION_5);
     return PolylineUtils.encode(geometryPositions, Constants.PRECISION_5);
   }
 

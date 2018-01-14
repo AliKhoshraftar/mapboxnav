@@ -16,6 +16,7 @@ import com.mapbox.services.android.navigation.v5.utils.RouteUtils;
 
 import java.util.List;
 
+import static com.mapbox.core.constants.Constants.PRECISION_5;
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationHelper.bearingMatchesManeuverFinalHeading;
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationHelper.checkMilestones;
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationHelper.getSnappedLocation;
@@ -25,7 +26,6 @@ import static com.mapbox.services.android.navigation.v5.navigation.NavigationHel
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationHelper.routeDistanceRemaining;
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationHelper.stepDistanceRemaining;
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationHelper.userSnappedToRoutePosition;
-import static com.mapbox.core.constants.Constants.PRECISION_6;
 
 /**
  * This class extends handler thread to run most of the navigation calculations on a separate
@@ -96,7 +96,7 @@ class NavigationEngine extends HandlerThread implements Handler.Callback {
       // Decode the first steps geometry and hold onto the resulting Position objects till the users
       // on the next step. Indices are both 0 since the user just started on the new route.
       stepPositions = PolylineUtils.decode(
-        directionsRoute.legs().get(0).steps().get(0).geometry(), PRECISION_6);
+        directionsRoute.legs().get(0).steps().get(0).geometry(), PRECISION_5);
 
       previousRouteProgress = RouteProgress.builder()
         .stepDistanceRemaining(directionsRoute.legs().get(0).steps().get(0).distance())
@@ -125,7 +125,7 @@ class NavigationEngine extends HandlerThread implements Handler.Callback {
       indices = increaseIndex(previousRouteProgress, indices);
       stepPositions = PolylineUtils.decode(
         directionsRoute.legs().get(
-          indices.legIndex()).steps().get(indices.stepIndex()).geometry(), PRECISION_6);
+          indices.legIndex()).steps().get(indices.stepIndex()).geometry(), PRECISION_5);
       snappedPosition = userSnappedToRoutePosition(location, stepPositions);
       stepDistanceRemaining = stepDistanceRemaining(
         snappedPosition, indices.legIndex(), indices.stepIndex(), directionsRoute, stepPositions);

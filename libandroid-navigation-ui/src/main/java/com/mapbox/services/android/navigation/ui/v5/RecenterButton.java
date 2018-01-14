@@ -82,7 +82,7 @@ public class RecenterButton extends CardView {
    */
   private void initAnimation() {
     slideUpBottom = new TranslateAnimation(0f, 0f, 125f, 0f);
-    slideUpBottom.setDuration(300);
+    slideUpBottom.setDuration(500);
     slideUpBottom.setInterpolator(new OvershootInterpolator(2.0f));
   }
 }

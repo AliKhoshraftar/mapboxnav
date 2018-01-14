@@ -33,7 +33,7 @@ public class DistanceUtils {
                                                          boolean spansEnabled,
                                                          int unitType) {
 
-    boolean isImperialUnitType = unitType == NavigationUnitType.TYPE_IMPERIAL;
+    boolean isImperialUnitType = unitType == NavigationUnitType.TYPE_METRIC;
 
     String largeUnitFormat = isImperialUnitType ? MILE : KILOMETER;
     String smallUnitFormat = isImperialUnitType ? FEET : METER;

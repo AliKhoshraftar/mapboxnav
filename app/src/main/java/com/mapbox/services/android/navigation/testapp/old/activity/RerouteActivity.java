@@ -242,9 +242,10 @@ public class RerouteActivity extends AppCompatActivity implements OnMapReadyCall
     }
   }
 
+  @SuppressLint("TimberArgCount")
   @Override
   public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-    Timber.e("Getting directions failed: ", throwable);
+    Timber.e(throwable, "Getting directions failed: ");
   }
 
   private void getRoute(Point origin, Point destination, Float bearing) {
@@ -258,7 +259,7 @@ public class RerouteActivity extends AppCompatActivity implements OnMapReadyCall
 
   private void drawRoute(DirectionsRoute route) {
     List<LatLng> points = new ArrayList<>();
-    List<Point> coords = LineString.fromPolyline(route.geometry(), Constants.PRECISION_6).coordinates();
+    List<Point> coords = LineString.fromPolyline(route.geometry(), Constants.PRECISION_5).coordinates();
 
     for (Point point : coords) {
       points.add(new LatLng(point.latitude(), point.longitude()));

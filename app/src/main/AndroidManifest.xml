@@ -17,6 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".old.MainActivityOld">
+        </activity>
         <activity
             android:name=".old.activity.MockNavigationActivity"
             android:label="@string/title_mock_navigation">

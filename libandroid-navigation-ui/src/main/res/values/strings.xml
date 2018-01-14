@@ -2,7 +2,7 @@
 <resources>
     <string name="rerouting">Rerouting…</string>
     <string name="directions">Directions</string>
-    <string name="re_center">Re-Center</string>
+    <string name="re_center">بازگشت به مسیر</string>
     <string name="muted">Muted</string>
     <string name="unmuted">Unmuted</string>
     <string name="navigation_guidance_day_v2"

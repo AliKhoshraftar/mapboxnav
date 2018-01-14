@@ -92,7 +92,7 @@ public class RouteStepProgressTest extends BaseTest {
   @Test
   public void distanceRemaining_equalsStepDistanceAtBeginning() {
     LineString lineString
-      = LineString.fromPolyline(firstLeg.steps().get(5).geometry(), Constants.PRECISION_6);
+      = LineString.fromPolyline(firstLeg.steps().get(5).geometry(), Constants.PRECISION_5);
     double stepDistance = TurfMeasurement.lineDistance(lineString, TurfConstants.UNIT_METERS);
 
     RouteProgress routeProgress = RouteProgress.builder()
@@ -111,7 +111,7 @@ public class RouteStepProgressTest extends BaseTest {
   @Test
   public void distanceRemaining_equalsCorrectValueAtIntervals() {
     LineString lineString
-      = LineString.fromPolyline(firstStep.geometry(), Constants.PRECISION_6);
+      = LineString.fromPolyline(firstStep.geometry(), Constants.PRECISION_5);
     double stepDistance = TurfMeasurement.lineDistance(lineString, TurfConstants.UNIT_METERS);
 
     double stepSegments = 5; // meters
@@ -174,7 +174,7 @@ public class RouteStepProgressTest extends BaseTest {
 
   @Test
   public void distanceTraveled_equalsCorrectValueAtIntervals() {
-    LineString lineString = LineString.fromPolyline(firstStep.geometry(), Constants.PRECISION_6);
+    LineString lineString = LineString.fromPolyline(firstStep.geometry(), Constants.PRECISION_5);
 
     double stepSegments = 5; // meters
 
@@ -239,7 +239,7 @@ public class RouteStepProgressTest extends BaseTest {
   @Test
   public void fractionTraveled_equalsCorrectValueAtIntervals() {
     LineString lineString
-      = LineString.fromPolyline(firstStep.geometry(), Constants.PRECISION_6);
+      = LineString.fromPolyline(firstStep.geometry(), Constants.PRECISION_5);
 
     double stepSegments = 5; // meters
 
@@ -305,7 +305,7 @@ public class RouteStepProgressTest extends BaseTest {
   @Test
   public void getDurationRemaining_equalsCorrectValueAtIntervals() {
     LineString lineString
-      = LineString.fromPolyline(firstStep.geometry(), Constants.PRECISION_6);
+      = LineString.fromPolyline(firstStep.geometry(), Constants.PRECISION_5);
 
     double stepSegments = 5; // meters
 
@@ -385,7 +385,7 @@ public class RouteStepProgressTest extends BaseTest {
 
     int currentStepTotal = route.legs().get(0).steps().get(lastStepIndex).intersections().size();
     List<Point> lastStepLocation = PolylineUtils.decode(
-    route.legs().get(0).steps().get(lastStepIndex).geometry(), Constants.PRECISION_6);
+    route.legs().get(0).steps().get(lastStepIndex).geometry(), Constants.PRECISION_5);
 
     assertEquals(currentStepTotal, routeStepProgress.intersections().size());
     assertEquals(routeStepProgress.intersections().get(0).location().latitude(), lastStepLocation.get(0).latitude());

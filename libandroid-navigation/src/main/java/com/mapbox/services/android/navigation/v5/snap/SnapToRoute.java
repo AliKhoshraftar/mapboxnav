@@ -14,7 +14,7 @@ import com.mapbox.turf.TurfMisc;
 
 import java.util.List;
 
-import static com.mapbox.core.constants.Constants.PRECISION_6;
+import static com.mapbox.core.constants.Constants.PRECISION_5;
 
 /**
  * This attempts to snap the user to the closest position along the route. Prior to snapping the
@@ -60,7 +60,7 @@ public class SnapToRoute extends Snap {
 
   private static float snapLocationBearing(RouteProgress routeProgress) {
     LineString lineString = LineString.fromPolyline(
-      routeProgress.currentLegProgress().currentStep().geometry(), PRECISION_6);
+      routeProgress.currentLegProgress().currentStep().geometry(), PRECISION_5);
 
     Point currentPoint = TurfMeasurement.along(
       lineString, routeProgress.currentLegProgress().currentStepProgress().distanceTraveled(),

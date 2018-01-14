@@ -16,6 +16,8 @@ import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
+import com.mapbox.mapboxsdk.annotations.Polygon;
+import com.mapbox.mapboxsdk.annotations.Polyline;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.exceptions.InvalidLatLngBoundsException;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -53,7 +55,7 @@ import retrofit2.Response;
 import static com.mapbox.services.android.telemetry.location.LocationEnginePriority.HIGH_ACCURACY;
 
 public class NavigationViewActivity extends AppCompatActivity implements OnMapReadyCallback,
-        MapboxMap.OnMapLongClickListener, LocationEngineListener, Callback<DirectionsResponse>,OnRouteSelectionChangeListener,NavigationListener,RouteListener,View.OnClickListener{
+        MapboxMap.OnMapLongClickListener, LocationEngineListener, Callback<DirectionsResponse>,OnRouteSelectionChangeListener,NavigationListener,RouteListener,View.OnClickListener,MapboxMap.OnMapClickListener{
 
     private static final int CAMERA_ANIMATION_DURATION = 1000;
 
@@ -121,6 +123,7 @@ public class NavigationViewActivity extends AppCompatActivity implements OnMapRe
         initLocationEngine();
         initLocationLayer();
         initMapRoute();
+
     }
 
     private void initMap() {
@@ -215,7 +218,7 @@ public class NavigationViewActivity extends AppCompatActivity implements OnMapRe
                 .shouldSimulateRoute(shouldSimulateRoute);
         if (route != null) {
             optionsBuilder.directionsRoute(route);
-            NavigationLauncher.startNavigation(this, optionsBuilder.build());
+            NavigationLauncher.startNavigation(this, optionsBuilder.origin(currentLocation).destination(destination).directionsRoute(route).build());
         }
     }
 
@@ -370,5 +373,10 @@ public class NavigationViewActivity extends AppCompatActivity implements OnMapRe
                 launchNavigationWithRoute();
                 break;
         }
+    }
+
+    @Override
+    public void onMapClick(@NonNull LatLng point) {
+
     }
 }

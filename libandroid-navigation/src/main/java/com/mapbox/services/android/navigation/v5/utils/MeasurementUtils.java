@@ -35,7 +35,7 @@ public final class MeasurementUtils {
     }
 
     // Get the lineString from the step geometry.
-    LineString lineString = LineString.fromPolyline(step.geometry(), Constants.PRECISION_6);
+    LineString lineString = LineString.fromPolyline(step.geometry(), Constants.PRECISION_5);
 
     // Make sure that the step coordinates isn't less than size 2. If the points equal each other,
     // the distance is obviously zero, so return 0 to avoid executing additional unnecessary code.

@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mapbox.services.android.navigation.testapp.R;
+import com.mapbox.services.android.navigation.testapp.old.activity.MockNavigationActivity;
+import com.mapbox.services.android.navigation.testapp.old.activity.RerouteActivity;
 import com.mapbox.services.android.navigation.testapp.old.activity.navigationui.NavigationMapRouteActivity;
 import com.mapbox.services.android.navigation.testapp.old.activity.navigationui.NavigationViewActivityOld;
 import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
@@ -36,28 +38,28 @@ public class MainActivityOld extends AppCompatActivity implements PermissionsLis
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main_old);
 
-//    final List<SampleItem> samples = new ArrayList<>(Arrays.asList(
-//      new SampleItem(
-//        getString(R.string.title_navigation_view_ui),
-//        getString(R.string.description_navigation_view_ui),
-//        NavigationViewActivityOld.class
-//      ),
-//      new SampleItem(
-//        getString(R.string.title_mock_navigation),
-//        getString(R.string.description_mock_navigation),
-//        MockNavigationActivity.class
-//      ),
-//      new SampleItem(
-//        getString(R.string.title_reroute),
-//        getString(R.string.description_reroute),
-//        RerouteActivity.class
-//      ),
-//      new SampleItem(
-//        getString(R.string.title_navigation_route_ui),
-//        getString(R.string.description_navigation_route_ui),
-//        NavigationMapRouteActivity.class
-//      )
-//    ));
+    final List<SampleItem> samples = new ArrayList<>(Arrays.asList(
+      new SampleItem(
+        getString(R.string.title_navigation_view_ui),
+        getString(R.string.description_navigation_view_ui),
+        NavigationViewActivityOld.class
+      ),
+      new SampleItem(
+        getString(R.string.title_mock_navigation),
+        getString(R.string.description_mock_navigation),
+        MockNavigationActivity.class
+      ),
+      new SampleItem(
+        getString(R.string.title_reroute),
+        getString(R.string.description_reroute),
+        RerouteActivity.class
+      ),
+      new SampleItem(
+        getString(R.string.title_navigation_route_ui),
+        getString(R.string.description_navigation_route_ui),
+        NavigationMapRouteActivity.class
+      )
+    ));
 
     // RecyclerView
     recyclerView = findViewById(R.id.recycler_view);
@@ -68,8 +70,8 @@ public class MainActivityOld extends AppCompatActivity implements PermissionsLis
     recyclerView.setLayoutManager(layoutManager);
 
     // Specify an adapter
-//    RecyclerView.Adapter adapter = new MainAdapter(samples);
-//    recyclerView.setAdapter(adapter);
+    RecyclerView.Adapter adapter = new MainAdapter(samples);
+    recyclerView.setAdapter(adapter);
 
     // Check for location permission
     permissionsManager = new PermissionsManager(this);

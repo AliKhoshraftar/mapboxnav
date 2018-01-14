@@ -48,6 +48,10 @@ public class NavigationLauncher {
     editor.putString(NavigationConstants.NAVIGATION_VIEW_AWS_POOL_ID, options.awsPoolId());
     editor.putBoolean(NavigationConstants.NAVIGATION_VIEW_SIMULATE_ROUTE, options.shouldSimulateRoute());
     editor.putInt(NavigationConstants.NAVIGATION_VIEW_UNIT_TYPE, options.navigationOptions().unitType());
+//    editor.putFloat(NavigationConstants.NAVIGATION_VIEW_ORIGIN_LAT_KEY,options.origin().latitude());
+//    editor.putLong(NavigationConstants.NAVIGATION_VIEW_ORIGIN_LNG_KEY,)
+//    editor.putLong(NavigationConstants.NAVIGATION_VIEW_DESTINATION_LAT_KEY,)
+//    editor.putLong(NavigationConstants.NAVIGATION_VIEW_DESTINATION_LNG_KEY,)
 
     setThemePreferences(options, editor);
 
@@ -106,6 +110,7 @@ public class NavigationLauncher {
   private static void storeRouteOptions(NavigationViewOptions options, SharedPreferences.Editor editor) {
     if (options.directionsRoute() != null) {
       storeDirectionsRouteValue(options, editor);
+      storeCoordinateValues(options, editor);
     } else if (options.origin() != null && options.destination() != null) {
       storeCoordinateValues(options, editor);
     } else {
@@ -135,7 +140,7 @@ public class NavigationLauncher {
 
   private static void storeCoordinateValues(NavigationViewOptions options, SharedPreferences.Editor editor) {
     // Reset any previous value for the route json
-    editor.putString(NavigationConstants.NAVIGATION_VIEW_ROUTE_KEY, "");
+//    editor.putString(NavigationConstants.NAVIGATION_VIEW_ROUTE_KEY, "");
     // Store the coordinates
     editor.putLong(NavigationConstants.NAVIGATION_VIEW_ORIGIN_LAT_KEY,
       Double.doubleToRawLongBits(options.origin().latitude()));

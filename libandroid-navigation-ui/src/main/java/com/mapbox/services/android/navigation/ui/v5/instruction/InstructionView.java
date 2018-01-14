@@ -77,7 +77,7 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
   private ManeuverView thenManeuverView;
   private TextView thenStepText;
   private TextView soundChipText;
-  private FloatingActionButton soundFab;
+//  private FloatingActionButton soundFab;
   private FloatingActionButton feedbackFab;
   private AlertView alertView;
   private View rerouteLayout;
@@ -331,7 +331,7 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
     thenManeuverView = findViewById(R.id.thenManeuverView);
     thenStepText = findViewById(R.id.thenStepText);
     soundChipText = findViewById(R.id.soundText);
-    soundFab = findViewById(R.id.soundFab);
+//    soundFab = findViewById(R.id.soundFab);
     feedbackFab = findViewById(R.id.feedbackFab);
     alertView = findViewById(R.id.alertView);
     rerouteLayout = findViewById(R.id.rerouteLayout);
@@ -382,7 +382,7 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
     isMuted = true;
     setSoundChipText(getContext().getString(R.string.muted));
     showSoundChip();
-    soundFabOff();
+//    soundFabOff();
     return isMuted;
   }
 
@@ -401,7 +401,7 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
     isMuted = false;
     setSoundChipText(getContext().getString(R.string.unmuted));
     showSoundChip();
-    soundFabOn();
+//    soundFabOn();
     return isMuted;
   }
 
@@ -409,17 +409,17 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
    * Changes sound {@link FloatingActionButton}
    * {@link android.graphics.drawable.Drawable} to denote sound is off.
    */
-  private void soundFabOff() {
-    soundFab.setImageResource(R.drawable.ic_sound_off);
-  }
-
-  /**
-   * Changes sound {@link FloatingActionButton}
-   * {@link android.graphics.drawable.Drawable} to denote sound is on.
-   */
-  private void soundFabOn() {
-    soundFab.setImageResource(R.drawable.ic_sound_on);
-  }
+//  private void soundFabOff() {
+//    soundFab.setImageResource(R.drawable.ic_sound_off);
+//  }
+//
+//  /**
+//   * Changes sound {@link FloatingActionButton}
+//   * {@link android.graphics.drawable.Drawable} to denote sound is on.
+//   */
+//  private void soundFabOn() {
+//    soundFab.setImageResource(R.drawable.ic_sound_on);
+//  }
 
   /**
    * Sets {@link TextView} inside of chip view.
@@ -533,12 +533,12 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
         alertView.hide();
       }
     });
-    soundFab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        navigationViewModel.setMuted(toggleMute());
-      }
-    });
+//    soundFab.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//        navigationViewModel.setMuted(toggleMute());
+//      }
+//    });
     feedbackFab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {

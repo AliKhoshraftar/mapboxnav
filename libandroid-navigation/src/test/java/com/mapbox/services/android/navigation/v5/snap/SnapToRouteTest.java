@@ -69,7 +69,7 @@ public class SnapToRouteTest extends BaseTest {
     Snap snap = new SnapToRoute();
     Location location = new Location("test");
     List<Point> coordinates = PolylineUtils.decode(
-      route.legs().get(0).steps().get(1).geometry(), Constants.PRECISION_6);
+      route.legs().get(0).steps().get(1).geometry(), Constants.PRECISION_5);
     Location snappedLocation
       = snap.getSnappedLocation(location, routeProgress, coordinates);
     assertTrue(snappedLocation.getProvider().equals("test-snapped"));

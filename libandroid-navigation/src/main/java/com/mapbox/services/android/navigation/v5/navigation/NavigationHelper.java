@@ -67,7 +67,7 @@ class NavigationHelper {
     Point nextManeuverPosition = nextManeuverPosition(stepIndex, steps, coordinates);
 
     LineString lineString = LineString.fromPolyline(steps.get(stepIndex).geometry(),
-      Constants.PRECISION_6);
+      Constants.PRECISION_5);
     // If the users snapped position equals the next maneuver
     // position or the linestring coordinate size is less than 2,the distance remaining is zero.
     if (snappedPosition.equals(nextManeuverPosition) || lineString.coordinates().size() < 2) {

@@ -1,5 +1,6 @@
 package com.mapbox.services.android.navigation.v5.location;
 
+import android.annotation.SuppressLint;
 import android.location.Location;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -132,6 +133,7 @@ public class MockLocationEngine extends LocationEngine {
    * @return a {@link Location} which represents the last mock location.
    * @since 2.2.0
    */
+  @SuppressLint("MissingPermission")
   @Override
   @Nullable
   public Location getLastLocation() {
@@ -318,7 +320,7 @@ public class MockLocationEngine extends LocationEngine {
    */
   private void calculateStepPoints() {
     LineString line = LineString.fromPolyline(
-      route.legs().get(currentLeg).steps().get(currentStep).geometry(), Constants.PRECISION_6);
+      route.legs().get(currentLeg).steps().get(currentStep).geometry(), Constants.PRECISION_5);
 
     increaseIndex();
 

@@ -45,7 +45,7 @@ public class NavigationHelperTest extends BaseTest {
 
     Location location = new Location("test");
     List<Point> coords = PolylineUtils.decode(route.legs().get(0).steps().get(1).geometry(),
-      Constants.PRECISION_6);
+      Constants.PRECISION_5);
     location.setLatitude(coords.get(0).latitude());
     location.setLongitude(coords.get(0).longitude());
 
@@ -117,7 +117,7 @@ public class NavigationHelperTest extends BaseTest {
   public void stepDistanceRemaining_returnsZeroWhenPositionsEqualEachOther() throws Exception {
     Point snappedPoint = Point.fromLngLat(-77.062996, 38.798405);
     List<Point> coordinates = PolylineUtils.decode(
-      route.legs().get(0).steps().get(1).geometry(), Constants.PRECISION_6);
+      route.legs().get(0).steps().get(1).geometry(), Constants.PRECISION_5);
     double distance = NavigationHelper.stepDistanceRemaining(snappedPoint, 0,
       1, route, coordinates);
     assertEquals(0.0, distance);
@@ -126,7 +126,7 @@ public class NavigationHelperTest extends BaseTest {
   @Test
   public void nextManeuverPosition_correctlyReturnsNextManeuverPosition() throws Exception {
     List<Point> coordinates = PolylineUtils.decode(
-      route.legs().get(0).steps().get(0).geometry(), Constants.PRECISION_6);
+      route.legs().get(0).steps().get(0).geometry(), Constants.PRECISION_5);
     Point nextManeuver = NavigationHelper.nextManeuverPosition(0,
       route.legs().get(0).steps(), coordinates);
     assertTrue(nextManeuver.equals(route.legs().get(0).steps().get(1).maneuver().location()));
@@ -136,7 +136,7 @@ public class NavigationHelperTest extends BaseTest {
   public void nextManeuverPosition_correctlyReturnsNextManeuverPositionInNextLeg() throws Exception {
     int stepIndex = route.legs().get(0).steps().size() - 1;
     List<Point> coordinates = PolylineUtils.decode(
-      route.legs().get(0).steps().get(stepIndex).geometry(), Constants.PRECISION_6);
+      route.legs().get(0).steps().get(stepIndex).geometry(), Constants.PRECISION_5);
     Point nextManeuver = NavigationHelper.nextManeuverPosition(stepIndex,
       route.legs().get(0).steps(), coordinates);
     assertTrue(nextManeuver.equals(route.legs().get(1).steps().get(0).maneuver().location()));
