@@ -78,7 +78,7 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
   private TextView thenStepText;
   private TextView soundChipText;
 //  private FloatingActionButton soundFab;
-  private FloatingActionButton feedbackFab;
+//  private FloatingActionButton feedbackFab;
   private AlertView alertView;
   private View rerouteLayout;
   private View turnLaneLayout;
@@ -332,7 +332,7 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
     thenStepText = findViewById(R.id.thenStepText);
     soundChipText = findViewById(R.id.soundText);
 //    soundFab = findViewById(R.id.soundFab);
-    feedbackFab = findViewById(R.id.feedbackFab);
+//    feedbackFab = findViewById(R.id.feedbackFab);
     alertView = findViewById(R.id.alertView);
     rerouteLayout = findViewById(R.id.rerouteLayout);
     turnLaneLayout = findViewById(R.id.turnLaneLayout);
@@ -539,13 +539,13 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
 //        navigationViewModel.setMuted(toggleMute());
 //      }
 //    });
-    feedbackFab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        navigationViewModel.recordFeedback(FeedbackEvent.FEEDBACK_SOURCE_UI);
-        showFeedbackBottomSheet();
-      }
-    });
+//    feedbackFab.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//        navigationViewModel.recordFeedback(FeedbackEvent.FEEDBACK_SOURCE_UI);
+//        showFeedbackBottomSheet();
+//      }
+//    });
   }
 
   /**
